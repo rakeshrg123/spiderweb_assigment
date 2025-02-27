@@ -1,275 +1,240 @@
 import React from "react";
-import { LuChevronDown } from "react-icons/lu";
-import { TbLogout2 } from "react-icons/tb";
+
 import { useState } from "react";
+import { FiEye } from "react-icons/fi";
+import { CiSearch } from "react-icons/ci";
+import { HiPlus } from "react-icons/hi2";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const [openEvents, setOpenEvents] = useState(true);
   const [openUsers, setOpenUsers] = useState(false);
+  const sidebarConfig = [
+    {
+      id: "events",
+      title: "Events",
+      items: [
+        { label: "New Requests" },
+        { label: "Estimate", count: 9 },
+        { label: "Events" },
+        { label: "Partial Requests" },
+      ],
+    },
+    {
+      id: "positions",
+      title: "Positions",
+      items: [],
+    },
+    {
+      id: "contractors",
+      title: "Contractors",
+      items: [],
+    },
+    {
+      id: "users",
+      title: "Users",
+      items: [
+        { label: "Admins" },
+        { label: "Clients" },
+        { label: "Coordinators" },
+      ],
+    },
+    {
+      id: "profile",
+      title: "Profile",
+      items: [],
+    },
+  ];
+  const handleLogout = () => {
+    // Handle logout logic here
+    console.log("Logout clicked");
+  };
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-5 gap-4 ">
-        <div className="col-span-1 flex flex-col gap-4 border-2 text-white border-[#d175b6] p-4 rounded-xl shadow-[0px_-1px_27px_5px_rgba(209,_117,_182,_0.35)]">
-          {/* <div className="flex flex-col gap-2">
-            <button className="text-[#D175B6] rounded-md flex items-center justify-between w-full p-2 border-2 border-[#D175B6] ">
-              <p>Events</p>
-              <LuChevronDown />
-            </button>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-3">
-              <p className="text-white">-</p>
-                <button className="text-[#D175B6] rounded-md flex items-center justify-between w-full p-2 border-1 border-[#D175B6] ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white  ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white  ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white ">
-                  <p className="text-xs">New Requests</p>
+      <Sidebar sections={sidebarConfig} onLogout={handleLogout} />
+        <div className="col-span-4 border-2 rounded-xl border-[#D175B6]">
+          <div className="container mx-auto rounded-xl shadow-[0px_0px_20px_5px_rgba(209,_117,_182,_0.5)] text-white">
+            {/* Header Section */}
+            <div className="flex justify-between items-center p-4">
+              <h2 className="text-2xl font-semibold">Event Requests</h2>
+              <div className="flex  items-center gap-2">
+                <div className="relative w-full">
+                  <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white-400" />
+                  <input
+                    type="text"
+                    placeholder="Search here"
+                    className="w-full pl-10 pr-4 py-2 rounded-md border border-white-600 focus:outline-none focus:ring-2 focus:ring-[#D175B6] text-white"
+                  />
+                </div>
+                <button className="bg-gradient-to-r from-[#FF00FF] to-[#8F00FF]  px-2 pb-1 w-10 h-10 rounded-md border-2 border-white flex items-center justify-center">
+                  <span className="text-xl font-bold">+</span>
                 </button>
               </div>
             </div>
-          </div>
-          <div className="p-2"><p className="text-white">Positions</p></div>
-          <div className="p-2"><p className="text-white">Contractors</p></div>
-          <div className="flex flex-col gap-2">
-            <button className="text-white  flex items-center justify-between w-full p-2 ">
-              <p>Users</p>
-              <LuChevronDown />
-            </button>
-            <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white  ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white  ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white  ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <p className="text-white">-</p>
-                <button className="text-white ">
-                  <p className="text-xs">New Requests</p>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="p-2"><p className="text-white">Profile</p></div>
-          <button className="flex items-center text-white gap-3 justify-center bg-black rounded-md p-3 mt-auto"><TbLogout2 className="w-5 h-5" /><p className="text-sm">Logout</p></button> */}
-          {/* <div className="w-64  text-white p-4 rounded-xl shadow-[0px_-1px_27px_5px_rgba(209,_117,_182,_0.35)] border-2 border-[#D175B6]"> */}
-          {/* Events Section */}
-          <div>
-            <button
-              onClick={() => setOpenEvents(!openEvents)}
-              className="text-[#D175B6] flex items-center justify-between w-full p-2 border-2 border-[#D175B6] rounded-md"
-            >
-              <p>Events</p>
-              <LuChevronDown
-                className={`${
-                  openEvents ? "rotate-180" : ""
-                } transition-transform`}
-              />
-            </button>
-            {openEvents && (
-              <div className="ml-4 mt-2   border-l-2 border-[#ffffff] ">
-                <div className="flex items-center gap-2">
-                  <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#D175B6]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
 
-                  <button className="text-[#D175B6] flex justify-between items-center w-full p-2 mt-2 border border-[#D175B6] rounded-md">
-                    <p className="text-xs">New Requests</p>
-                  </button>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2  flex items-center justify-between w-full">
-                    Estimate{" "}
-                    <span className="bg-[#ffffff] px-2 py-1 rounded-full text-[#D175B6] text-xs">
-                      9
-                    </span>
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2 w-full">Events</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2 w-full">Partial Requests</p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Static Sections */}
-          <div className="mt-4 p-2 flex flex-col gap-4">
-            <p className="text-sm">Positions</p>
-            <p className="text-sm">Contractors</p>
-          </div>
-
-          {/* Users Section */}
-          <div className="mt-4">
-            <button
-              onClick={() => setOpenUsers(!openUsers)}
-              className="flex items-center justify-between w-full p-2"
-            >
-              <p>Users</p>
-              <LuChevronDown
-                className={`${
-                  openUsers ? "rotate-180" : ""
-                } transition-transform`}
-              />
-            </button>
-            {openUsers && (
-              <div className="ml-4 mt-2 border-l-2 border-[#ffffff] ">
-                <div className="flex items-center gap-2">
-                   <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2">Admins</p>
-                </div>
-                <div className="flex items-center gap-2">
-                   <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2">Clients</p>
-                </div>
-                <div className="flex items-center gap-2">
-                   <svg
-                    width="29"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#ffffff]"
-                  >
-                    <path
-                      d="M 10 0 V 12 Q 10 15 13 15 H 20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                  <p className="text-xs cursor-pointer mt-2">Coordinators</p>
-                </div>
-              </div>
-            )}
-            {/* </div> */}
-
-            {/* Profile Section */}
-            <div className="mt-4 mb-4 p-2">
-              <p className="text-sm">Profile</p>
+            {/* Scrollable Table Container */}
+            <div className="w-full overflow-x-auto">
+              <table className="min-w-[1000px] border-collapse border border-[#D175B6]">
+                <thead>
+                  <tr className="bg-[#D175B6] text-white">
+                    <th className="p-3 text-left sticky left-0 bg-[#D175B6] z-10 min-w-[200px]">
+                      Event Name
+                    </th>
+                    <th className="p-3 text-left min-w-[150px]">Event Start</th>
+                    <th className="p-3 text-left min-w-[150px]">Event End</th>
+                    <th className="p-3 text-left min-w-[200px]">Client Name</th>
+                    <th className="p-3 text-left min-w-[200px]">
+                      Contact Info
+                    </th>
+                    <th className="p-3 text-left min-w-[300px]">Venue</th>
+                    <th className="p-3 text-left min-w-[150px]">City</th>
+                    <th className="p-3 text-left min-w-[150px]">State</th>
+                    <th className="p-3 text-left min-w-[150px]">Zip-code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                  <tr className="border-t border-[#D175B6]">
+                    <td className="flex items-center gap-4 p-3 sticky left-0 backdrop-blur-md bg-opacity-10 z-10 min-w-[200px]">
+                      <FiEye />
+                      Filled Name
+                    </td>
+                    <td className="p-3">Jan 12, 2024</td>
+                    <td className="p-3">Jan 14, 2024</td>
+                    <td className="p-3">Muhammad Asad</td>
+                    <td className="p-3">+1234 566 7890</td>
+                    <td className="p-3">Lorem Ipsum Dolor Sit Amet</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                    <td className="p-3">-</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            {/* Logout Button */}
-            <button className="flex items-center gap-3 justify-center bg-black border border-white rounded-md p-3 mt-auto w-full hover:bg-[#D175B6] transition">
-              <TbLogout2 className="w-5 h-5" />
-              <p className="text-sm">Logout</p>
-            </button>
+            {/* Pagination */}
+          </div>
+          <div className="flex  mt-auto justify-center bg-black rounded-b-xl items-center space-x-4">
+            <button className=" py-1 text-white">&larr;</button>
+            <button className=" py-1 text-white">1</button>
+            <button className=" py-1 text-white">2</button>
+            <button className=" py-1 text-white">3</button>
+            <button className=" py-1 text-[#D175B6] font-bold">4</button>
+            <button className=" py-1 text-white">&rarr;</button>
           </div>
         </div>
-        <div className="col-span-4 border-2 rounded-xl border-[#D175B6]"></div>
       </div>
     </div>
   );
