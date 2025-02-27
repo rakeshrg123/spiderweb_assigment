@@ -125,3 +125,68 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+#solutionGradient {
+  position: absolute; /* Ensure it covers the entire container */
+  inset: 0; /* Top, Right, Bottom, Left = 0 (full coverage) */
+  overflow: hidden;
+  background: linear-gradient(
+    251deg,
+    #533a83 1.29%,
+    #20408a 36.33%,
+    #000100 67.92%,
+    #533a83 97.53%
+  );
+  background-size: 200% 200%;
+  animation: gradientAnimation 30s ease-in-out infinite; /* Slower Animation */
+  z-index: 0; /* Places gradient behind everything */
+}
+
+#solutionGradient::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* Full Coverage */
+  background: radial-gradient(
+    circle,
+    rgba(83, 58, 131, 0.7) 0%,
+    rgba(32, 64, 138, 0) 50%
+  );
+  animation: blobAnimation 30s ease-in-out infinite; /* Slower Blob Animation */
+  pointer-events: none;
+  z-index: 0; /* Behind Content */
+}
+
+@keyframes gradientAnimation {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes blobAnimation {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(25%, 15%); }
+  40% { transform: translate(-15%, -25%); }
+  60% { transform: translate(35%, 10%); }
+  80% { transform: translate(-25%, 25%); }
+}
+
+.solution-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1; /* Keeps container above background */
+}
+
+.solution-content {
+  position: relative;
+  z-index: 2; /* Keeps content on top */
+}
+
+.solution-content h1,
+.solution-content button {
+  position: relative;
+  z-index: 3; /* Text & Buttons above everything */
+}

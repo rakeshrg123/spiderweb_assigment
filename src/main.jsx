@@ -5,8 +5,9 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#533d84] to-[#010101]">
-        <App />
+    <div id="solutionGradient"></div> {/* Background Gradient */}
+    <div className="relative z-10"> {/* Ensures content stays above */}
+      <App />
     </div>
   
   </StrictMode>,
