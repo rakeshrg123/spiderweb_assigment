@@ -154,7 +154,7 @@ export default function Home() {
                       fill="none"
                     />
                   </svg>
-                  <p className="text-xs cursor-pointer mt-2">Events</p>
+                  <p className="text-xs cursor-pointer mt-2 w-full">Events</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg
@@ -172,7 +172,7 @@ export default function Home() {
                       fill="none"
                     />
                   </svg>
-                  <p className="text-xs cursor-pointer mt-2">Partial Requests</p>
+                  <p className="text-xs cursor-pointer mt-2 w-full">Partial Requests</p>
                 </div>
               </div>
             )}
