@@ -64,7 +64,7 @@ const EventDetailView = ({ event }) => {
   });
 
   return (
-    <div className="col-span-4 border-2 rounded-xl border-[#D175B6] p-4">
+    <div className="col-span-4 border-2 rounded-xl border-[#D175B6] p-4 overflow-hidden">
       {/* Header with back button and event name */}
       <div className="flex items-center gap-2 mb-4 text-white">
         <button
@@ -99,7 +99,7 @@ const EventDetailView = ({ event }) => {
       </div>
 
       {/* Main content */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Left column */}
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">
