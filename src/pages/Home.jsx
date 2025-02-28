@@ -1,40 +1,13 @@
 import React, { useState } from "react";
 import { FiEye } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
-import Sidebar from "../components/Sidebar";
 import { HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-
-
-const sidebarConfig = [
-  {
-    id: "events",
-    title: "Events",
-    items: [
-      { label: "New Requests" },
-      { label: "Estimate", count: 9 },
-      { label: "Events" },
-      { label: "Partial Requests" },
-    ],
-  },
-  { id: "positions", title: "Positions", items: [] },
-  { id: "contractors", title: "Contractors", items: [] },
-  {
-    id: "users",
-    title: "Users",
-    items: [
-      { label: "Admins" },
-      { label: "Clients" },
-      { label: "Coordinators" },
-    ],
-  },
-  { id: "profile", title: "Profile", items: [] },
-];
 
 const TableRow = ({ event, onViewDetails }) => (
   <tr className="border-t border-[#D175B6]">
     <td className="flex items-center gap-4 h-11.5 px-4 sticky left-0 z-10 min-w-[250px] backdrop-blur-xl opacity-300 shadow-md">
-      <Link to={'/viewDetails'} className="text-lg">
+      <Link to={"/viewDetails"} className="text-lg">
         <FiEye />
       </Link>
       {event.name}
@@ -84,7 +57,6 @@ const Table = ({ events, onViewDetails }) => (
 );
 
 const Home = () => {
-  const handleLogout = () => console.log("Logout clicked");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const events = Array(9).fill({
@@ -100,46 +72,41 @@ const Home = () => {
     setSelectedEvent(event);
   };
 
-
   return (
-    <div className="container mx-auto grid grid-cols-5 gap-4 z-10">
-      <Sidebar sections={sidebarConfig} onLogout={handleLogout} />
-        <div className="col-span-4 border-2 rounded-xl border-[#D175B6]">
-          <div className="container mx-auto rounded-xl shadow-lg text-white">
-            <div className="flex justify-between items-center p-4">
-              <h2 className="text-2xl font-semibold">Event Requests</h2>
-              <div className="flex items-center gap-2">
-                <div className="relative w-full">
-                  <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white-400" />
-                  <input
-                    type="text"
-                    placeholder="Search here"
-                    className="w-full pl-10 pr-4 py-2 rounded-md border border-white-600 focus:outline-none focus:ring-2 focus:ring-[#D175B6] text-white"
-                  />
-                </div>
-                <button className="bg-gradient-to-r from-[#FF00FF] to-[#8F00FF] px-2 w-10 h-10 rounded-md border-2 border-white flex items-center justify-center">
-                  <span className="text-xl font-extrabold">
-                    <HiPlus />
-                  </span>
-                </button>
-              </div>
+    <div className="col-span-4 border-2 rounded-xl border-[#D175B6]">
+      <div className="container mx-auto rounded-xl shadow-lg text-white">
+        <div className="flex justify-between items-center p-4">
+          <h2 className="text-2xl font-semibold">Event Requests</h2>
+          <div className="flex items-center gap-2">
+            <div className="relative w-full">
+              <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white-400" />
+              <input
+                type="text"
+                placeholder="Search here"
+                className="w-full pl-10 pr-4 py-2 rounded-md border border-white-600 focus:outline-none focus:ring-2 focus:ring-[#D175B6] text-white"
+              />
             </div>
-            <Table events={events} onViewDetails={handleViewDetails} />
-          </div>
-          <div className="flex mt-auto justify-center bg-black rounded-b-xl items-center space-x-4 p-2">
-            {["←", "1", "2", "3", "4", "→"].map((item, index) => (
-              <button
-                key={index}
-                className={`py-1 
-    ${item === "4" ? "!text-[#D175B6] font-bold" : ""} 
-    ${item === "→" ? "text-gray-500" : "text-white"}`}
-              >
-                {item}
-              </button>
-            ))}
+            <button className="bg-gradient-to-r from-[#FF00FF] to-[#8F00FF] px-2 w-10 h-10 rounded-md border-2 border-white flex items-center justify-center">
+              <span className="text-xl font-extrabold">
+                <HiPlus />
+              </span>
+            </button>
           </div>
         </div>
-
+        <Table events={events} onViewDetails={handleViewDetails} />
+      </div>
+      <div className="flex mt-auto justify-center bg-black rounded-b-xl items-center space-x-4 p-2">
+        {["←", "1", "2", "3", "4", "→"].map((item, index) => (
+          <button
+            key={index}
+            className={`py-1 
+    ${item === "4" ? "!text-[#D175B6] font-bold" : ""} 
+    ${item === "→" ? "text-gray-500" : "text-white"}`}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,34 +1,10 @@
 import React, { useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
 import { HiChevronDown } from "react-icons/hi2";
-import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const EventDetailView = ({ event, onBack }) => {
-
-    const sidebarConfig = [
-        {
-          id: "events",
-          title: "Events",
-          items: [
-            { label: "New Requests" },
-            { label: "Estimate", count: 9 },
-            { label: "Events" },
-            { label: "Partial Requests" },
-          ],
-        },
-        { id: "positions", title: "Positions", items: [] },
-        { id: "contractors", title: "Contractors", items: [] },
-        {
-          id: "users",
-          title: "Users",
-          items: [
-            { label: "Admins" },
-            { label: "Clients" },
-            { label: "Coordinators" },
-          ],
-        },
-        { id: "profile", title: "Profile", items: [] },
-      ];
+const EventDetailView = ({ event }) => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [activeTab, setActiveTab] = useState("Assign Coordinator/Coordinator");
   const [selectedRoom, setSelectedRoom] = useState(1);
 
@@ -80,56 +56,47 @@ const EventDetailView = ({ event, onBack }) => {
   ];
 
   // Camera positions for each room
-  const positions = Array(8).fill({
+  const positions = Array(5).fill({
     name: "Camera 1 (Video)",
     time: "9 am - 7 pm",
     info: "LP default",
     quantity: 20,
   });
-    const handleLogout = () => console.log("Logout clicked");
-    const [selectedEvent, setSelectedEvent] = useState(null);
 
   return (
-    <div className="container mx-auto grid grid-cols-5 gap-4 z-10">
-      <Sidebar sections={sidebarConfig} onLogout={handleLogout} />
     <div className="col-span-4 border-2 rounded-xl border-[#D175B6] p-4">
       {/* Header with back button and event name */}
       <div className="flex items-center gap-2 mb-4 text-white">
         <button
-          onClick={onBack}
-          className="flex items-center justify-center text-white"
+          onClick={() => navigate(-1)} // Use navigate(-1) to go back
+          className="flex items-center justify-center text-white cursor-pointer"
         >
           <HiArrowLeft className="text-xl" />
         </button>
         <h2 className="text-2xl font-semibold">
-          Event Name <span className="text-lg font-normal">(Venue Details)</span>
+          Event Name{" "}
+          <span className="text-lg font-normal">(Venue Details)</span>
         </h2>
       </div>
 
       {/* Tabs */}
       <div className="flex mb-6">
-  {tabs.map((tab, index) => (
-    <button
-      key={tab}
-      className={`px-4 py-2 ${
-        activeTab === tab
-          ? "bg-[#D175B6] text-white"
-          : "text-[#D175B6]"
-      } border border-[#D175B6] ${
-        index === 0 
-          ? "rounded-tl-md rounded-bl-md" 
-          : ""
-      } ${
-        index === tabs.length - 1 
-          ? "rounded-tr-md rounded-br-md" 
-          : ""
-      }`}
-      onClick={() => setActiveTab(tab)}
-    >
-      {tab}
-    </button>
-  ))}
-</div>
+        {tabs.map((tab, index) => (
+          <button
+            key={tab}
+            className={`px-4 py-2 ${
+              activeTab === tab ? "bg-[#D175B6] text-white" : "text-[#D175B6]"
+            } border border-[#D175B6] ${
+              index === 0 ? "rounded-tl-md rounded-bl-md" : ""
+            } ${
+              index === tabs.length - 1 ? "rounded-tr-md rounded-br-md" : ""
+            }`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
       {/* Main content */}
       <div className="grid grid-cols-2 gap-4">
@@ -138,7 +105,7 @@ const EventDetailView = ({ event, onBack }) => {
           <h3 className="text-xl font-semibold text-white mb-4">
             Assign Coordinator
           </h3>
-          
+
           <div className="relative mb-2">
             <input
               type="text"
@@ -149,7 +116,7 @@ const EventDetailView = ({ event, onBack }) => {
               <HiChevronDown />
             </span>
           </div>
-          
+
           <button className="text-[#D175B6] font-medium">
             Add New Coordinator
           </button>
@@ -163,17 +130,22 @@ const EventDetailView = ({ event, onBack }) => {
               <div
                 key={room.id}
                 className={`${
-                  selectedRoom === room.id 
-                    ? "bg-[#D175B6]" 
+                  selectedRoom === room.id
+                    ? "bg-[#D175B6]"
                     : "bg-black hover:bg-gray-900"
                 } p-4 mb-2 cursor-pointer`}
                 onClick={() => setSelectedRoom(room.id)}
               >
                 <div className="flex items-center">
                   <h4 className="text-white font-semibold">
-                    {room.name} 
+                    {room.name}
                     <span className="inline-flex items-center ml-2">
-                      <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-pink-300" stroke="currentColor">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="w-4 h-4 text-pink-300"
+                        stroke="currentColor"
+                      >
                         <path d="M12 2L14.5 9H22L16 13.5L18.5 20.5L12 16L5.5 20.5L8 13.5L2 9H9.5L12 2Z" />
                       </svg>
                     </span>
@@ -216,9 +188,7 @@ const EventDetailView = ({ event, onBack }) => {
             </span>
           </div>
 
-          <h3 className="text-xl font-semibold text-white mb-4">
-            Positions
-          </h3>
+          <h3 className="text-xl font-semibold text-white mb-4">Positions</h3>
 
           <div className="bg-black rounded-lg overflow-hidden border border-[#D175B6]">
             <table className="w-full text-white">
@@ -255,7 +225,7 @@ const EventDetailView = ({ event, onBack }) => {
                 ))}
               </tbody>
             </table>
-            
+
             {/* Pagination */}
             <div className="flex justify-end p-3 gap-2">
               <button className="text-white">←</button>
@@ -273,7 +243,6 @@ const EventDetailView = ({ event, onBack }) => {
           Save Edits
         </button>
       </div>
-    </div>
     </div>
   );
 };
