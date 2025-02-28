@@ -15,14 +15,14 @@ const MobileSidebarWrapper = ({ sections, onLogout }) => {
       {/* Mobile sidebar overlay */}
       {isMobileSidebarOpen && (
         <div 
-          className="fixed inset-0 z-20"
+          className="fixed inset-0 bg-black opacity-50 z-20"
           onClick={toggleMobileSidebar}
         />
       )}
       
       {/* Mobile sidebar container */}
       <div 
-        className={`fixed top-0 left-0 h-full w-3/4 z-30 bg-gradient-to-br from-[#533a83] via-[#20408a] to-[#000100] transition-transform duration-300 ease-in-out pt-24 px-4 ${
+        className={`fixed top-0 left-0 h-full w-[80vw] z-30 bg-gradient-to-br from-[#533a83] via-[#20408a] to-[#000100] transition-transform duration-300 ease-in-out pt-24 px-4 ${
           isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
