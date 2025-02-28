@@ -2,18 +2,42 @@ import React from "react";
 import { GoBell } from "react-icons/go";
 import { CiSquareInfo } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { HiOutlineMenu } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
+import { useSidebar } from "@/context/SidebarContext";
+
 
 export default function Navbar() {
+  const { isMobileSidebarOpen, toggleMobileSidebar, isMobile } = useSidebar();
+
   return (
     <div className="container mx-auto">
       <div className="text-white flex justify-between py-8">
-        <div className="w-10 md:w-13 h-10 md:h-13">
-          <img
-            src="/bitcoin.png"
-            alt="logo"
-            className="w-full h-full object-contain"
-          />
+        <div className="flex items-center gap-4">
+          <div className="w-10 md:w-13 h-10 md:h-13">
+            <img
+              src="/bitcoin.png"
+              alt="logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          {isMobile && (
+            <>
+              {isMobileSidebarOpen ? (
+                <IoMdClose 
+                  className="w-6 h-6 cursor-pointer" 
+                  onClick={toggleMobileSidebar}
+                />
+              ) : (
+                <HiOutlineMenu 
+                  className="w-6 h-6 cursor-pointer" 
+                  onClick={toggleMobileSidebar}
+                />
+              )}
+            </>
+          )}
         </div>
+
         <div className="flex items-center gap-4">
           <CiSquareInfo className="md:w-6 md:h-6" />
           <GoBell className="md:w-6 md:h-6" />
